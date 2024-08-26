@@ -14,7 +14,6 @@ const Dashboard = ({ holdings }) => {
                     const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${h.stock}&outputsize=compact&apikey=${API_KEY}`);
                     const data = await response.json();
 
-                    // Check if the time series data is available
                     if (data && data['Time Series (Daily)']) {
                         const timeSeries = data['Time Series (Daily)'];
                         const latestDate = Object.keys(timeSeries)[0];
@@ -22,11 +21,11 @@ const Dashboard = ({ holdings }) => {
                         newPrices[h.stock] = parseFloat(latestPrice);
                     } else {
                         console.error(`No time series data available for ${h.stock}.`, data);
-                        newPrices[h.stock] = 'N/A'; // Handle missing data
+                        newPrices[h.stock] = 'Loading...'; 
                     }
                 } catch (error) {
                     console.error('Error fetching data:', error);
-                    newPrices[h.stock] = 'Error'; // Indicate an error occurred
+                    newPrices[h.stock] = 'Error';
                 }
             }
             setPrices(newPrices);
@@ -75,7 +74,7 @@ const Dashboard = ({ holdings }) => {
                                     <td>
                                         {prices[h.stock] && !isNaN(prices[h.stock])
                                             ? `$${(prices[h.stock] * Math.max(h.quantity, 0)).toFixed(2)}`
-                                            : 'N/A'}
+                                            : 'Loading...'}
                                     </td>
                                 </tr>
                             ))}
