@@ -2,7 +2,7 @@
   "name": "stock-market-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Sk-Siva.github.io/",
+  "homepage": "https://sk-siva.github.io/Conversely-Assignment-2",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
